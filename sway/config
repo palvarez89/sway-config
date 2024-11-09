@@ -66,6 +66,12 @@ output * bg /usr/share/backgrounds/default.png fill
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+
+# or input <identifier>
+input "type:keyboard" {
+    xkb_layout gb,es
+    xkb_variant ,nodeadkeys
+}
 ### Key bindings
 #
 # Basics:
@@ -157,13 +163,13 @@ output * bg /usr/share/backgrounds/default.png fill
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    bindsym $mod+m fullscreen
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    # TODO bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
@@ -203,6 +209,8 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+bindsym $mod+space input * xkb_switch_layout next
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
