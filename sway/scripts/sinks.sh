@@ -7,7 +7,7 @@ other_sink_id=$(pw-dump Node Device | jq '.[].info.props|select(."api.alsa.pcm.s
 
 echo $default_sink_id
 echo $other_sink_id | tr '"' '\n' | grep -v '^\s*$' | sort -n
-selection=$(echo $other_sink_id | tr '"' '\n' | grep -v '^\s*$' | sort -n| rofi -dmenu -p="Select Audio Output")
+selection=$(echo $other_sink_id | tr '"' '\n' | grep -v '^\s*$' | sort -n| rofi -dmenu -p "Select Audio Output")
 
 echo "Selected \"$selection\""
 selection=$(echo $selection | cut -d " " -f 1)
