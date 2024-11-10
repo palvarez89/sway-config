@@ -11,6 +11,9 @@ selection=$(echo $other_sink_id | tr '"' '\n' | grep -v '^\s*$' | sort -n| rofi 
 
 echo "Selected \"$selection\""
 selection=$(echo $selection | cut -d " " -f 1)
+if [ x$selection == "x" ]; then
+    exit 1
+fi
 wpctl set-default $selection
 new_sink_name=$(pw-metadata 0 'default.audio.sink' | grep 'value' | sed "s/.* value:'//;s/' type:.*$//;" | jq .name )
 new_sink_id=$(pw-dump Node Device | jq '.[].info.props|select(."node.name" == '" $new_sink_name "')|."object.id"')
