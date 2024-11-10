@@ -16,6 +16,7 @@
     ],
     "modules-right": [
         "idle_inhibitor",
+        "custom/audio-output",
         "pulseaudio",
         "network",
         "power-profiles-daemon",
@@ -207,5 +208,12 @@
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
+    },
+    "custom/audio-output": {
+        "exec": "$HOME/.config/waybar/scripts/current_audio_sink.sh",
+        "format": "{}",
+        "tooltip": true,
+        "on-click": "$HOME/.config/waybar/scripts/audio_switch_sink.sh",
+        "interval": 10
     }
 }
