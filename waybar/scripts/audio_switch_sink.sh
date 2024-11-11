@@ -17,7 +17,7 @@ fi
 wpctl set-default $selection
 new_sink_name=$(pw-metadata 0 'default.audio.sink' | grep 'value' | sed "s/.* value:'//;s/' type:.*$//;" | jq .name )
 new_sink_id=$(pw-dump Node Device | jq '.[].info.props|select(."node.name" == '" $new_sink_name "')|."object.id"')
-if [ $new_sink_id != selection ]; then
+if [ $new_sink_id != $selection ]; then
     notify-send "Failed to change audio sink" -u critical -t 2000
 else
     new_sink_nick=$(pw-dump Node Device | jq '.[].info.props|select(."node.name" == '" $new_sink_name "')|."node.nick"')
