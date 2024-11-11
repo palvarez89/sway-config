@@ -16,6 +16,7 @@
     ],
     "modules-right": [
         "idle_inhibitor",
+        "custom/nmvpn",
         "custom/audio-output",
         "pulseaudio",
         "network",
@@ -215,5 +216,16 @@
         "tooltip": true,
         "on-click": "$HOME/.config/waybar/scripts/audio_switch_sink.sh",
         "interval": 10
+    },
+    "custom/nmvpn": {
+        "format": "{} {icon}",
+        "return-type": "json",
+        "exec": "$GOPATH/bin/waybar-nmvpn",
+        "format-icons": {
+            "connected": "",
+            "disconnected": "",
+            "none": "",
+            "error": "⚠"
+        }
     }
 }
