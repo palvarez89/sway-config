@@ -214,6 +214,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bindsym $mod+space input * xkb_switch_layout next
+bindsym $mod+Print exec grim -g "$(slurp -d)" - | wl-copy
 
 
 # Run commands
