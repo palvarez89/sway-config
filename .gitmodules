@@ -1,0 +1,6 @@
+[submodule "sway/deps/kanshi"]
+	path = sway/deps/kanshi
+	url = https://git.sr.ht/~emersion/kanshi
+[submodule "sway/deps/nwg-displays"]
+	path = sway/deps/nwg-displays
+	url = https://github.com/nwg-piotr/nwg-displays
