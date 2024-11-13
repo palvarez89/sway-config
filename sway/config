@@ -213,8 +213,12 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Switch keyboard layout
 bindsym $mod+space input * xkb_switch_layout next
+# PrintScr to clipboard
 bindsym $mod+Print exec grim -g "$(slurp -d)" - | wl-copy
+# Lock screen
+bindsym $mod+Shift+Escape  exec loginctl lock-session
 
 
 # Run commands
