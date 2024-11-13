@@ -218,7 +218,7 @@ bindsym $mod+space input * xkb_switch_layout next
 # PrintScr to clipboard
 bindsym $mod+Print exec grim -g "$(slurp -d)" - | wl-copy
 # Lock screen
-bindsym $mod+Shift+Escape  exec loginctl lock-session
+bindsym $mod+Shift+Escape  exec swaylock -f -k -F -c 000000
 
 
 # Run commands
