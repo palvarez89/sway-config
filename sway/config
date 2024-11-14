@@ -138,6 +138,10 @@ input "type:keyboard" {
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+    # With arrow keys
+    bindsym $mod+Control+Right workspace next
+    bindsym $mod+Control+Left workspace prev
+
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -172,7 +176,7 @@ input "type:keyboard" {
     bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    # TODO bindsym $mod+space focus mode_toggle
+    bindsym $mod+Control+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
