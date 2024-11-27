@@ -226,7 +226,7 @@
         "interval": 2
     },
     "custom/playerctl": {
-        "exec": "playerctl metadata --format '{{status}}: {{artist}} - {{title}}' || echo 'No media playing'",
+        "exec": "playerctl metadata --format '{{status}}: {{artist}} - {{title}}' | awk '{ if (length($0) > 30) print substr($0, 1, 27) \"...\"; else print $0 }' || echo 'No media playing'",
         "exec-if": "sh -c 'playerctl status | grep -vq Stopped'",
         "interval": 1,
         "on-click": "playerctl play-pause",
