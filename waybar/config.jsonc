@@ -9,7 +9,8 @@
     "modules-left": [
         "sway/workspaces",
         "sway/mode",
-        "sway/scratchpad"
+        "sway/scratchpad",
+        "custom/playerctl"
     ],
     "modules-center": [
         "sway/window"
@@ -223,5 +224,14 @@
     "custom/inhibit_idle": {
         "exec": "~/.config/waybar/scripts/inhibit_idle.sh",
         "interval": 2
+    },
+    "custom/playerctl": {
+        "exec": "playerctl metadata --format '{{status}}: {{artist}} - {{title}}' || echo 'No media playing'",
+        "exec-if": "sh -c 'playerctl status | grep -vq Stopped'",
+        "interval": 1,
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "tooltip": true
     }
 }

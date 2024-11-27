@@ -338,3 +338,16 @@ label:focus {
     background-color: rgba(0xeb, 0x4d, 0x4b, 0.8);
     box-shadow: inset 0 -3px rgba(0xeb, 0x4d, 0x4b, 1.0);
 }
+
+#custom-playerctl {
+  background-color: #2e3440;
+  color: #eceff4;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+#custom-playerctl:hover {
+  background-color: #81a1c1;
+  color: #2e3440;
+}
