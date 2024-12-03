@@ -142,6 +142,10 @@ input "type:keyboard" {
     bindsym $mod+Control+Right workspace next
     bindsym $mod+Control+Left workspace prev
 
+    # Move workspace around monitors
+    bindsym $mod+Control+Shift+Right move workspace to output right
+    bindsym $mod+Control+Shift+Left move workspace to output left
+
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
