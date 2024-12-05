@@ -208,7 +208,7 @@
 		"menu-actions": {
 			"lock": "swaylock -f -c 000000",
 			"logout": "swaymsg exit",
-			"shutdown": "shutdown",
+			"shutdown": "shutdown now",
 			"reboot": "reboot",
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
