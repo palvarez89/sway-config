@@ -19,6 +19,7 @@
         "custom/inhibit_idle",
         "idle_inhibitor",
         "custom/audio-output",
+        "custom/wlsunset",
         "pulseaudio",
         "network",
         "power-profiles-daemon",
@@ -233,5 +234,11 @@
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
         "tooltip": true
-    }
+    },
+    "custom/wlsunset":{
+        "format": "",
+        "on-click-right": "bash ~/.config/waybar/scripts/red_off",
+        "on-scroll-up": "bash ~/.config/waybar/scripts/red_inc",
+        "on-scroll-down": "bash ~/.config/waybar/scripts/red_dec"
+  }
 }
