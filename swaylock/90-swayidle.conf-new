@@ -17,7 +17,7 @@
 # Requires: swayidle
 # Requires: swaylock
 # Requires: /usr/bin/pkill, /usr/bin/pgrep
-
+export PATH=$HOME/swaylock-effects/usr/bin:$PATH
 exec LT="$lock_timeout" ST="$screen_timeout" LT=${LT:-300} ST=${ST:-60} && \
     swayidle -w \
         timeout $LT 'swaylock -f' \
