@@ -78,7 +78,7 @@ input "type:touchpad" {
 # or input <identifier>
 input "type:keyboard" {
     xkb_layout gb,es
-    xkb_variant ,nodeadkeys
+    xkb_variant ,
 }
 ### Key bindings
 #
