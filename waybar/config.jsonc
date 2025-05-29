@@ -17,6 +17,7 @@
     ],
     "modules-right": [
         "custom/inhibit_idle",
+        "custom/dunst",
         "idle_inhibitor",
         "custom/audio-output",
         "custom/wlsunset",
@@ -207,7 +208,7 @@
 		"menu": "on-click",
 		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
 		"menu-actions": {
-			"lock": "swaylock -f -c 000000",
+			"lock": "~/swaylock-effects/usr/bin/swaylock -f -k -F -c 000000 --clock --indicator",
 			"logout": "swaymsg exit",
 			"shutdown": "shutdown now",
 			"reboot": "reboot",
@@ -234,6 +235,13 @@
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
         "tooltip": true
+    },
+    "custom/dunst": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/dunst_toggle.sh",
+        "on-click": "~/.config/waybar/scripts/dunst_toggle.sh toggle",
+	"return-type": "json",
+        "interval": 5
     },
     "custom/wlsunset":{
         "format": "",

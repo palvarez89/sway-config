@@ -351,3 +351,11 @@ label:focus {
   background-color: #81a1c1;
   color: #2e3440;
 }
+#custom-dunst.paused {
+    color: #ff5555;
+}
+
+#custom-dunst.unpaused {
+    color: #50fa7b;
+}
+
