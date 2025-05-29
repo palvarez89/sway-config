@@ -241,7 +241,8 @@
         "exec": "~/.config/waybar/scripts/dunst_toggle.sh",
         "on-click": "~/.config/waybar/scripts/dunst_toggle.sh toggle",
 	"return-type": "json",
-        "interval": 5
+        "interval": 2,
+        "signal": 10
     },
     "custom/wlsunset":{
         "format": "",
