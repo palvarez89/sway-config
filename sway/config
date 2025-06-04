@@ -231,7 +231,7 @@ bindsym $mod+space input * xkb_switch_layout next
 # PrintScr to clipboard
 bindsym $mod+Print exec grim -g "$(slurp -d)" - | wl-copy
 # Lock screen
-bindsym $mod+Shift+Escape  exec swaylock -f -k -F -c 000000
+bindsym $mod+Shift+Escape  exec ~/swaylock-effects/usr/bin/swaylock -f -k -F -c 000000 --clock --indicator
 # Disable inhibit_idle on focused
 bindsym $mod+u exec swaymsg '[con_id="__focused__"] inhibit_idle none'
 
