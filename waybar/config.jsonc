@@ -18,6 +18,7 @@
     "modules-right": [
         "custom/inhibit_idle",
         "idle_inhibitor",
+        "custom/ci",
         "custom/audio-output",
         "custom/wlsunset",
         "pulseaudio",
@@ -243,6 +244,12 @@
 	"return-type": "json",
         "interval": 2,
         "signal": 10
+    },
+    "custom/ci": {
+      "exec": "~/.config/waybar/scripts/ci-status.py",
+      "interval": 5,
+      "return-type": "json",
+      "on-click": "~/.config/waybar/scripts/ci-menu.py"
     },
     "custom/wlsunset":{
         "format": "",
