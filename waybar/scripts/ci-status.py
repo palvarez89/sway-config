@@ -7,7 +7,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 
 FEED = "http://epbr-cc-tray.s3-website.eu-west-2.amazonaws.com/"
-PREFIXES = ("epbr-data-warehouse-pipeline", "epbr-data-frontend-pipeline", "epbr-addressing-pipeline")
+PREFIXES = ("epbr-data-warehouse-pipeline", "epbr-data-frontend-pipeline", "epbr-addressing-pipeline", "epbr-register-api-pipeline")
 
 def fetch(url: str, timeout: int = 8) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": "Waybar-CCTray/1.0"})
