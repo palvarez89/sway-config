@@ -20,6 +20,7 @@
         "idle_inhibitor",
         "custom/ci",
         "custom/audio-output",
+        "custom/audio-input",
         "custom/wlsunset",
         "pulseaudio",
         "network",
@@ -222,8 +223,17 @@
         "format": "{}",
         "tooltip": true,
         "on-click": "$HOME/.config/waybar/scripts/audio_switch_sink.sh",
-        "interval": 10
+        "interval": 3
     },
+    "custom/audio-input": {
+        "format": "{}",
+        "tooltip": true,
+        "exec": "$HOME/.config/waybar/scripts/current_input.sh",
+	"return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/switch_input.sh",
+        "interval": 3
+    },
+
     "custom/inhibit_idle": {
         "exec": "~/.config/waybar/scripts/inhibit_idle.sh",
         "interval": 2
