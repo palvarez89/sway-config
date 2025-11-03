@@ -236,6 +236,8 @@ bindsym $mod+Shift+Escape  exec ~/swaylock-effects/usr/bin/swaylock -f -k -F -c 
 bindsym $mod+u exec swaymsg '[con_id="__focused__"] inhibit_idle none'
 # Run restore focus
 bindsym $mod+Shift+f  exec ~/.config/waybar/scripts/restore_focus.sh
+# Scan QR code and copy decoded content to clipboard
+bindsym $mod+Shift+o exec grim -g "$(slurp -d)" /tmp/qr.png && zbarimg --raw /tmp/qr.png | wl-copy && rm /tmp/qr.png
 
 
 # Run commands
