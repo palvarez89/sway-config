@@ -21,9 +21,12 @@ profile=$(pw-dump | jq -r --arg name "$default_sink_name" '
   (."api.bluez5.profile" // empty)
 ')
 
+
 if [ -n "$profile" ]; then
-  echo "$default_sink_nick [$profile]"
+  output="$default_sink_nick [$profile]"
 else
-  echo "$default_sink_nick"
+  output="$default_sink_nick"
 fi
 
+# Trim to 16 characters
+echo "${output:0:16}"
