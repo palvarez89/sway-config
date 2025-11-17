@@ -238,7 +238,8 @@ bindsym $mod+u exec swaymsg '[con_id="__focused__"] inhibit_idle none'
 bindsym $mod+Shift+f  exec ~/.config/waybar/scripts/restore_focus.sh
 # Scan QR code and copy decoded content to clipboard
 bindsym $mod+Shift+o exec grim -g "$(slurp -d)" /tmp/qr.png && zbarimg --raw /tmp/qr.png | wl-copy && rm /tmp/qr.png
-
+# Auto scale laptop screen
+bindsym $mod+Shift+p  exec ~/.config/sway/scripts/auto-scale.sh
 
 # Run commands
 exec_always nm-applet --indicator
