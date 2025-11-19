@@ -31,7 +31,7 @@ set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # Requires: desktop-backgrounds-compat, swaybg
-output * bg /usr/share/backgrounds/f42/default/f42-01-day.jxl  fill
+# output * bg /usr/share/backgrounds/f42/default/f42-01-day.jxl  fill
 
 gaps inner 2
 
@@ -243,6 +243,10 @@ bindsym $mod+Shift+p  exec ~/.config/sway/scripts/auto-scale.sh
 
 # Run commands
 exec_always nm-applet --indicator
+
+# wpaperd daemon
+exec ~/.local/bin/wpaperd -d
+
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
