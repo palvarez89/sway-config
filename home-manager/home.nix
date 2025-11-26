@@ -15,6 +15,24 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
+  # Ensure HM configures .deskop files correctly using XDG_DATA_DIRS
+  targets.genericLinux.enable = true;
+
+  # Needed to manage XDG directories + .desktop entries
+  xdg.enable = true;
+
+  # Custom slack.deskop file to enable wayland
+  xdg.desktopEntries.slack = {
+    name = "Slack";
+    genericName = "Messaging Client";
+    comment = "Slack with Wayland flags";
+    exec = "/usr/bin/slack --ozone-platform=wayland --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer %U";
+    type = "Application";
+    icon = "/usr/share/pixmaps/slack.png";
+    categories = [ "GNOME" "GTK" "Network" "InstantMessaging" ];
+    mimeType = [ "x-scheme-handler/slack" ];
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
