@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixGL, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -29,6 +29,7 @@
     # pkgs.hello
 
     pkgs.swaylock-effects
+    # pkgs.wpaperd
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -77,6 +78,34 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+  };
+
+  services.wpaperd = {
+    enable = true;
+
+    package = pkgs.runCommand "wpaperd-nixgl" { buildInputs = [ pkgs.makeWrapper ]; } ''
+          mkdir -p $out/bin
+          # Use nixGLDefault which auto-detects Nvidia vs Mesa (Intel/AMD)
+          makeWrapper ${nixGL.packages.${pkgs.system}.nixGLDefault}/bin/nixGL $out/bin/wpaperd-nixgl \
+            --add-flags "${pkgs.wpaperd}/bin/wpaperd"
+        '';
+
+    settings = {
+
+      default = {
+        path = "${config.home.homeDirectory}/Pictures/Wallpapers";
+
+        duration = "10m";
+        mode = "fit-border-color";
+        recursive = true;
+
+        # Note: wpaperd has limited transition support (usually just crossfade).
+        # It doesn't use an 'effect' key, but recent versions might support 'transition-time'.
+        # If this causes an error, remove it.
+        transition-time = 300;
+
+      };
+    };
   };
 
   # Let Home Manager install and manage itself.
