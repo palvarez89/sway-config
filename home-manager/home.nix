@@ -1,11 +1,10 @@
-{ config, pkgs, nixGL, ... }:
+{ config, pkgs, nixGL, lib, ... }:
 
+let
+  WALLPAPERS="$HOME/Pictures/Wallpapers";
+  REPO="git@github.com:palvarez89/wallpapers.git";
+in
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "pedro";
-  home.homeDirectory = "/home/pedro";
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -13,7 +12,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  # home.stateVersion = "25.05"; # Please read the comment before changing.
 
   # Ensure HM configures .deskop files correctly using XDG_DATA_DIRS
   targets.genericLinux.enable = true;
@@ -80,6 +79,50 @@
     # EDITOR = "emacs";
   };
 
+
+
+
+  # One-time initialization of the wallpapers folder
+  home.activation.initWallpapers = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "${WALLPAPERS}"
+
+    if [ ! -d "${WALLPAPERS}/.git" ]; then
+      echo "Initializing wallpapers git repo..."
+      /usr/bin/git -C "${WALLPAPERS}" init
+      /usr/bin/git -C "${WALLPAPERS}" remote add origin "${REPO}"
+    fi
+
+    # Pull latest if folder is empty
+    if [ -z "$(ls -A ${WALLPAPERS})" ]; then
+      echo "Pulling wallpapers from remote..."
+      /usr/bin/git -C "${WALLPAPERS}" pull origin main || true
+    fi
+  '';
+
+  # Systemd service to sync wallpapers periodically
+  systemd.user.services.wallpaper-git-sync = {
+    Unit = {
+      Description = "Update wallpapers from GitHub";
+      After = [ "network-online.target" ];
+    };
+
+    Service = {
+      Type = "oneshot";
+      WorkingDirectory = WALLPAPERS;
+      ExecStart = "/usr/bin/git pull --ff-only";
+      SuccessExitStatus = [0 1]; # don’t fail if no updates
+    };
+  };
+
+  systemd.user.timers.wallpaper-git-sync = {
+    Unit = { Description = "Periodic wallpaper git sync"; };
+    Timer = {
+      OnCalendar = "hourly";
+      Persistent = true;
+    };
+    Install = { WantedBy = [ "timers.target" ]; };
+  };
+
   services.wpaperd = {
     enable = true;
 
@@ -98,15 +141,21 @@
         duration = "10m";
         mode = "fit-border-color";
         recursive = true;
-
-        # Note: wpaperd has limited transition support (usually just crossfade).
-        # It doesn't use an 'effect' key, but recent versions might support 'transition-time'.
-        # If this causes an error, remove it.
-        transition-time = 300;
-
       };
     };
   };
+
+  systemd.user.services.wpaperd = {
+    Service = {
+      Type = "idle";  # wait for session
+      Environment = "DISPLAY=${env:DISPLAY}";
+      ExecStart = lib.mkDefault "${pkgs.wpaperd}/bin/wpaperd";
+
+      Restart = "always";
+    };
+    Install = { WantedBy = [ "default.target" ]; };
+  };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

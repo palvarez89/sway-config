@@ -1,0 +1,3 @@
+ptyxis
+gnome-keyring
+systemctl --user enable gnome-keyring-daemon
