@@ -16,18 +16,37 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+
+      mkHome = { username, homeDirectory, stateVersion}:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          # Specify your home configuration modules here, for example,
+          # the path to your home.nix.
+          modules = [
+            {
+              home.username = username;
+              home.homeDirectory = homeDirectory;
+              home.stateVersion = stateVersion;
+            }
+            ./home.nix
+          ];
+          extraSpecialArgs = { inherit nixGL; };
+        };
     in
     {
-      homeConfigurations."pedro" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations = {
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-        extraSpecialArgs = { inherit nixGL; };
+        pedroalvarez = mkHome {
+          username = "pedroalvarez";
+          homeDirectory = "/home/pedroalvarez";
+          stateVersion = "23.11";
+        };
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        pedro = mkHome {
+          username = "pedro";
+          homeDirectory = "/home/pedro";
+          stateVersion = "25.05";
+        };
       };
     };
 }
