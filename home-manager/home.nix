@@ -136,11 +136,17 @@ in
     settings = {
 
       default = {
-        path = "${config.home.homeDirectory}/Pictures/Wallpapers";
-
         duration = "10m";
         mode = "fit-border-color";
         recursive = true;
+      };
+
+      "eDP-1" = {
+        path = "${config.home.homeDirectory}/Pictures/Wallpapers/16x10";
+      };
+
+      any = {
+        path = "${config.home.homeDirectory}/Pictures/Wallpapers/16x9";
       };
     };
   };
