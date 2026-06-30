@@ -28,6 +28,7 @@ in
     # pkgs.hello
 
     pkgs.swaylock-effects
+    pkgs.nwg-displays
     # pkgs.wpaperd
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -59,6 +60,12 @@ in
     # '';
   };
 
+  xdg.configFile."sway/environment".text = ''
+    if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+      . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+    fi
+  '';
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
@@ -79,7 +86,26 @@ in
     # EDITOR = "emacs";
   };
 
+  xdg.desktopEntries.nwg-displays = {
+    name = "Displays Settings";
+    genericName = "Output configuration utility";
+    comment = "nwg-shell tool to configure outputs";
+    exec = lib.getExe pkgs.nwg-displays;
+    terminal = false;
+    icon = "nwg-displays";
+    categories = [
+      "Settings"
+      "DesktopSettings"
+    ];
+  };
 
+
+  #xdg.desktopEntries.slack = {
+  #  name = "Slack in browser";
+  #  exec = "google-chrome-stable --app=https://app.slack.com/client/";
+  #  terminal = false;
+  #  categories = [ "Network" "InstantMessaging" ];
+  #};
 
 
   # One-time initialization of the wallpapers folder
