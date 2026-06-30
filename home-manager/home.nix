@@ -100,12 +100,12 @@ in
   };
 
 
-  #xdg.desktopEntries.slack = {
-  #  name = "Slack in browser";
-  #  exec = "google-chrome-stable --app=https://app.slack.com/client/";
-  #  terminal = false;
-  #  categories = [ "Network" "InstantMessaging" ];
-  #};
+  xdg.desktopEntries.slackpwa = {
+    name = "Slack (PWA)";
+    exec = "google-chrome-stable --app=https://app.slack.com/client/";
+    terminal = false;
+    categories = [ "Network" "InstantMessaging" ];
+  };
 
 
   # One-time initialization of the wallpapers folder
