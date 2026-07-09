@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Get list of connected outputs from swaymsg
-echo "DEBUG: Fetching outputs from swaymsg..." >&2
-
 # Define output patterns and their settings
 # Format: "pattern|mode|scale|scale_filter"
 output_configs=(
@@ -11,32 +8,22 @@ output_configs=(
     "DELL S2725QC|mode 3840x2160@60Hz|scale 1.2|scale_filter linear"
 )
 
-echo "DEBUG: Processing ${#output_configs[@]} output configs" >&2
-
 # Generate output blocks
 swaymsg -t get_outputs | jq -r '.[] | select(.active) | [.make, .model] | join(" ")' | while read -r output; do
     # Remove any embedded newlines
     output=$(echo "$output" | tr '\n' ' ' | xargs)
     
-    echo "DEBUG: Checking output: '$output'" >&2
-    matched=0
     for config in "${output_configs[@]}"; do
         IFS='|' read -r pattern mode scale scale_filter <<< "$config"
-        echo "DEBUG:   Trying pattern: '$pattern'" >&2
         
         if [[ $output == *"$pattern"* ]]; then
-            echo "DEBUG:   MATCHED!" >&2
             echo "output \"$output\" {"
             echo "    $mode"
             echo "    $scale"
             echo "    $scale_filter"
             echo "}"
             echo
-            matched=1
             break
         fi
     done
-    if [[ $matched -eq 0 ]]; then
-        echo "DEBUG:   No match found for '$output'" >&2
-    fi
 done
