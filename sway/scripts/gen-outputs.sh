@@ -1,12 +1,7 @@
 #!/bin/bash
 
-# Get list of connected outputs from swaymsg with null separator
+# Get list of connected outputs from swaymsg
 echo "DEBUG: Fetching outputs from swaymsg..." >&2
-mapfile -d '' connected_outputs < <(swaymsg -t get_outputs | jq -r '.[] | select(.active) | "\(.make) \(.model)\n"')
-
-for i in "${!connected_outputs[@]}"; do
-    echo "DEBUG: Output $i: '${connected_outputs[$i]}'" >&2
-done
 
 # Define output patterns and their settings
 # Format: "pattern|mode|scale|scale_filter"
@@ -16,9 +11,13 @@ output_configs=(
     "DELL S2725QC|mode 3840x2160@60Hz|scale 1.2|scale_filter linear"
 )
 
+echo "DEBUG: Processing ${#output_configs[@]} output configs" >&2
 
 # Generate output blocks
-for output in "${connected_outputs[@]}"; do
+swaymsg -t get_outputs | jq -r '.[] | select(.active) | [.make, .model] | join(" ")' | while read -r output; do
+    # Remove any embedded newlines
+    output=$(echo "$output" | tr '\n' ' ' | xargs)
+    
     echo "DEBUG: Checking output: '$output'" >&2
     matched=0
     for config in "${output_configs[@]}"; do
