@@ -177,6 +177,65 @@ in
     };
   };
 
+
+  services.kanshi = {
+    enable = true;
+    settings = [
+      # 1. Specific case: Your 1080p Dell monitor
+      {
+        profile = {
+          name = "docked-1080p";
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 1.2;
+              status = "enable";
+            }
+            {
+              criteria = "Dell Inc. DELL SE2722HX 9KY71R3";
+              scale = 0.8;
+              status = "enable";
+            }
+          ];
+        };
+      }
+
+      # 2. General 4K case: Matches your Philips AND all office Dell 4K monitors
+      {
+        profile = {
+          name = "docked-4k";
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 1.2;
+              status = "enable";
+            }
+            {
+              criteria = "*";
+              mode = "3840x2160@60Hz";
+              scale = 1.2;
+              status = "enable";
+            }
+          ];
+        };
+      }
+
+      # 3. Fallback: Laptop only
+      {
+        profile = {
+          name = "undocked";
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 1.0;
+              status = "enable";
+            }
+          ];
+        };
+      }
+    ];
+  };
+
   systemd.user.services.wpaperd = {
     Service = {
       Type = "idle";  # wait for session
