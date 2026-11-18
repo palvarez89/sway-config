@@ -200,10 +200,10 @@ in
         };
       }
 
-      # 2. General 4K case: Matches your Philips AND all office Dell 4K monitors
+      # 2. Home 4K case: Matches your Philips home monitor
       {
         profile = {
-          name = "docked-4k";
+          name = "docked-4k-at-home";
           outputs = [
             {
               criteria = "eDP-1";
@@ -211,7 +211,26 @@ in
               status = "enable";
             }
             {
-              criteria = "*";
+              criteria = "Philips Consumer Electronics Company PHL 288E2 UK52124002606";
+              mode = "3840x2160@60Hz";
+              scale = 1.2;
+              status = "enable";
+            }
+          ];
+        };
+      }
+      # 3. General 4K case: Matches all office Dell 4K monitors
+      {
+        profile = {
+          name = "docked-4k-colony";
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 1.2;
+              status = "enable";
+            }
+            {
+              criteria = "Dell Inc. DELL S2725QC*";
               mode = "3840x2160@60Hz";
               scale = 1.2;
               status = "enable";
@@ -220,7 +239,7 @@ in
         };
       }
 
-      # 3. Fallback: Laptop only
+      # 4. Fallback: Laptop only
       {
         profile = {
           name = "undocked";
