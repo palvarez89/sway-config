@@ -266,6 +266,23 @@ in
     Install = { WantedBy = [ "default.target" ]; };
   };
 
+  programs.fuzzel = {
+    enable = true;
+
+    settings = {
+      main = {
+        terminal = "foot";
+        layer = "overlay";
+        width = 45;
+        lines = 10;
+        font = "monospace:size=12";
+        prompt = "❯ ";
+        icon-theme = "Papirus";
+        icons-enabled = true;
+        exit-on-keyboard-focus-loss = false;
+      };
+    };
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
